@@ -15,3 +15,4 @@ Silvia Uson Fortanet| 681721 | [![Build Status](https://travis-ci.org/siluf/lab1
 Xian Pan | 699328 | [![Build Status](https://travis-ci.org/DreamaerD/lab1-git-race.svg)](https://travis-ci.org/DreamaerD/lab1-git-race)
 Sergio Andrés | 568051 | [![Build Status](https://travis-ci.org/sandresmuniesa/lab1-git-race.svg)](https://travis-ci.org/sandresmuniesa/lab1-git-race)
 Ivan Santamaria | 698367 | [![Build Status](https://travis-ci.org/ivsm/lab1-git-race.svg)](https://travis-ci.org/ivsm/lab1-git-race)
+Iván Escuín González | 684146 | [![Build Status](https://travis-ci.org/crzyivo/lab1-git-race.svg)](https://travis-ci.org/crzyivo/lab1-git-race)
