@@ -25,6 +25,14 @@ sudo apt install gradle
 
 2. Verify your installation with the command `gradle -v` on your Ubuntu system
 
+## Arch Linux
+1. To install Gradle on your Arch Linux system, use the following command:
+```
+sudo pacman -S gradle
+```
+
+2. Verify that Gradle has been installed using `gradle -v`.
+
 # Deployment with Heroku
 
 ### Procfile
@@ -88,3 +96,104 @@ building the code with Travis if commits were added before setting up Travis:
 1. On your Travis repository, click on 'More options' at the right.
 1. Select 'Trigger build'.
 1. Fill the fields with the new config (optional) and click on 'Trigger custom build'.
+
+# Deploy your app using Gradle
+
+Thanks to the huge variety of plugins available for Gradle, Gradle's automation capabilities can be greatly extended. In this case, we'll be using [the Gradle Cargo Plugin](https://github.com/bmuschko/gradle-cargo-plugin) to deploy our project to a local or even a remote server using Gradle.
+
+In this example we'll be using Tomcat 8.0, but [more applications are supported](https://codehaus-cargo.github.io/cargo/Home.html). Be sure that the applications is correctly installed and that the permissions of its configurations files are correctly set. Otherwise, you will be facing a lot of errors.
+
+## Configuration
+
+Firstly we need to add the following code snippet to the very beginning of our `build.gradle`, in order to retrieve the Cargo Plugin
+
+```
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-cargo-plugin:2.2.3'
+    }
+}
+```
+
+Next we need to add the following code snippet to use the plugin
+```
+apply plugin: 'com.bmuschko.cargo'
+
+```
+We also need to set up its dependencies. To do so, copy the following code snippet to the `dependencies` closure of your `build.gradle`
+```
+    def cargoVersion = '1.4.5'
+    cargo "org.codehaus.cargo:cargo-core-uberjar:$cargoVersion",
+          "org.codehaus.cargo:cargo-ant:$cargoVersion"
+```
+
+Now we can configure how the Plugin works. The following code shows an example. It should be included at the end of your `build.gradle`
+
+```
+cargoStartLocal.dependsOn assemble
+cargoDeployRemote.dependsOn assemble
+
+cargo {
+  containerId='tomcat8x'
+  
+  remote {
+    hostname = 'valor.humiltat.es'
+    username = 'seny'
+    password = 'imparapla'
+  }
+
+  local {
+    homeDir=file('/usr/share/tomcat8')
+  }
+} 
+```
+
+With the first two lines we are making the Cargo plugin tasks depend on assemble. Prior to deploying to a local or remote server the project will be assemble.
+
+The `cargo` closure defines the properties of the plugin. `containerId` refers to the application where our app will be deployed.
+
+Within the first closure we can find to two different closures:
+  * The `local` closure defines how the app is deployed in our local server. The path to the server is defined using the `homeDir` property. 
+
+  * The `remote` closure defines how the app is deployed in our remote server. While `hostname` indicates the hostname of our server, `username` and `password` define the credentials for the remote web container.
+
+## Usage
+
+Once we have correctly configured our `build.gradle` we can deploy our application using Gradle.
+
+To deploy to the local server use the following command: 
+
+```
+gradle cargoStartLocal
+```
+
+To stop the local server use the following one:
+```
+gradle stopLocal 
+```
+
+To deploy the app to the remote server use this command:
+```
+gradle cargoDeployRemote
+```
+
+To undeploy it use this command:
+```
+gradle cargoUndeployRemote
+```
+
+## Travis integration
+
+In addition, we can use Travis to automatically deploy our app to our local server once all the changes pushed to the master branch have passed the test. To do so, add the following code snippet to your `.travis.yml` file.
+
+```
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      ./gradlew cargoDeployRemote
+    fi
+```
+
+
