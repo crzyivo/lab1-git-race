@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css"
       href="webjars/bootstrap/3.3.5/css/bootstrap.min.css"/>
 <body>
+<h1>${salute}</h1>
 <kbd>${time}<span class="glyphicon glyphicon-console"></span>${message}</kbd>
 <script type="text/javascript" src="webjars/jquery/2.1.4/jquery.min.js"></script>
 </body>
