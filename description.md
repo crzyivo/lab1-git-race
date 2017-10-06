@@ -196,4 +196,37 @@ after_success:
     fi
 ```
 
+## Password encryption
 
+As you can see this solution has a big downside. Our password is public and without any encryption. Gradle doesn't provide native support to encryption, but a workaround exists. 
+
+Firstly, we need to create a `gradle.properties` file in the same directory where our `build.gradle` is stored. This file should also be included in our `.gitignore` file, because we just want to keep it locally. In our `gradle.properties` file we should add the following lines, containing our password.
+
+```
+encrypted_user = seny
+```
+
+Now we need to modify our `build.gradle`, replacing our password with the following:
+
+```
+  remote {
+    hostname = 'valor.humiltat.es'
+    username = seny
+    password = ${encrypted_pass}
+  }
+
+```
+
+These method might not be the best one, but at least our password is not in plain text and public. As this method does keep our pass locally, our Travis Build will fail. To fix this, we need to encrypt our password using Travis. To do so, we need to execute the following command in the directory where our `.travis.yml` is located.
+
+```
+travis encrypt PASSWD="imparapla" --add
+```
+
+Now we need to modify our `.travis.yml` to use the encrypted password. Replace the `after_success` with the following code:
+```
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      ./gradlew -Pencrypted_pass=${PASSWD} cargoDeployRemote
+    fi
+```
