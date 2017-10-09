@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.*;
+import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Map;
 
 /**
  * Component that processes client requests.
@@ -23,6 +26,8 @@ public class HelloController {
     private String message;
     @Value("${app.message:Hello World}")
     private String salute;
+    @Value("${app.deadline:Oct 5, 2017 00:00:00}")
+    private String deadline;
 
     /**
      * Returns the logical name of the view that will be rendered when a GET request for "/" comes in.
@@ -72,6 +77,8 @@ public class HelloController {
 
         //Assign in the key "salute" the value of the salute variable.
         model.put("salute", salute);
+        //Assign in the key "deadline" the value of the deadline variable.
+        model.put("deadline", deadline);
 
         return "welcome";
     }

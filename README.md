@@ -16,4 +16,5 @@ Xian Pan | 699328 | [![Build Status](https://travis-ci.org/DreamaerD/lab1-git-ra
 Sergio Andrés | 568051 | [![Build Status](https://travis-ci.org/sandresmuniesa/lab1-git-race.svg)](https://travis-ci.org/sandresmuniesa/lab1-git-race)
 Ivan Santamaria | 698367 | [![Build Status](https://travis-ci.org/ivsm/lab1-git-race.svg)](https://travis-ci.org/ivsm/lab1-git-race)
 David Fustero | 699329 | [![Build Status](https://travis-ci.org/fiusa8/lab1-git-race.svg)](https://travis-ci.org/fiusa8/lab1-git-race)
+Óscar León Barbed Pérez | 666137 | [![Build Status](https://travis-ci.org/LeonBP/lab1-git-race.svg)](https://travis-ci.org/LeonBP/lab1-git-race)
 Iván Escuín González | 684146 | [![Build Status](https://travis-ci.org/crzyivo/lab1-git-race.svg)](https://travis-ci.org/crzyivo/lab1-git-race)
