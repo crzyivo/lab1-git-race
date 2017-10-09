@@ -223,6 +223,15 @@ These method might not be the best one, but at least our password is not in plai
 travis encrypt PASSWD="imparapla" --add
 ```
 
+This command will add the following lines to our `travis.yml` file
+```
+env:
+  global:
+    secure: ...
+```
+
+The secure closure contains the var PASSWD and its value encrypted with the public key available at https://api.travis-ci.org/repos/your-username/your-repo/key. Travis uses the corresponding private key to decipher the information when a new build is triggered. 
+
 Now we need to modify our `.travis.yml` to use the encrypted password. Replace the `after_success` with the following code:
 ```
 after_success:
