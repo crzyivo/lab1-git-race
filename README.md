@@ -18,3 +18,4 @@ Ivan Santamaria | 698367 | [![Build Status](https://travis-ci.org/ivsm/lab1-git-
 David Fustero | 699329 | [![Build Status](https://travis-ci.org/fiusa8/lab1-git-race.svg)](https://travis-ci.org/fiusa8/lab1-git-race)
 Óscar León Barbed Pérez | 666137 | [![Build Status](https://travis-ci.org/LeonBP/lab1-git-race.svg)](https://travis-ci.org/LeonBP/lab1-git-race)
 Iván Escuín González | 684146 | [![Build Status](https://travis-ci.org/crzyivo/lab1-git-race.svg)](https://travis-ci.org/crzyivo/lab1-git-race) | :gift:
+Jorge Martínez Romanos | 702089 | [![Build Status](https://travis-ci.org/jmromanos/lab1-git-race.svg)](https://travis-ci.org/jmromanos/lab1-git-race) | :gift:
